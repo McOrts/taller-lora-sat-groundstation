@@ -9,6 +9,12 @@ El tipo de receptor se basa en los estándares del proyecto [tinyGS](https://git
 TinyGS se define como una red abierta de estaciones terrestres distribuidas por todo el mundo para recibir y operar satélites LoRa, sondas meteorológicas y otros objetos voladores, utilizando módulos baratos y versátiles.
 
 ## Montaje del receptor
+<img src="./img/Photo 8-11-20, 12 58 03.jpg" width=600 align="center" />
+
+El procedimiento de instalación está en constante evolucion por lo que voy a señalar los bloques principales sin entrar en detalles. Que si podrás consultar en los enlaces correspondientes.
+- dddd
+- 
+
 ### Mi instalación
 
 (pendiente)
@@ -40,6 +46,22 @@ También vamos a necesitar algunos 'nodos' adicionales a los que la instalación
 ## IFTTT
 Para recibir los avisos vamos a usar el servicio de [If This Then That](https://ifttt.com/home) que se integrará fácilmente en Node-RED usando el nodo de petición HTTP.
 
+```
+
+```
+
 El servicio a configurar es simple. Utilizaremos el componente Webhooks para captar el evento y las notificaciones para que salte el aviso en nuestro dispositivo: móvil, smartwatch...
+
+### Montaje final
+Una vez configurado el servidor Node-RED y nuestro evento en IFTTT. Nos queda tres últimos pasos: 
+1. Crear la tabla en la BBDD MysSQL:
+```
+
+```
+2. Importar en Node-RED el fichero [nodered_dashboard4TINYGS.json](/nodered_dashboard4TINYGS.json) que contiene todos los flujos.
+3. Configurar las credenciales y hash para acceder a:
+-- Servidor MQTT
+-- Servidor MySQL
+-- Llamada a IFTTT
 
 
