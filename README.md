@@ -26,13 +26,15 @@ Además de esta placa necesitarás lo siguiente:
 El procedimiento de instalación está en constante evolucion por lo que vamos a señalar los bloques principales sin entrar en detalles. Detalles que si podrás consultar en los enlaces correspondientes.
 1. [Instalar el _firmware_ en el microcontrolador](https://github.com/G4lile0/tinyGS/wiki/Quick-Start).
 2. Obtener las credenciales de la plataforma (MQTT). Para ello tendrás que acceder al BOT de Telegram: @tinygs_personal_bot:
-<img src="./img/start_bot.png" width=300 align="center" />
+<img src="./img/start_bot.png" width=400 align="center" />
+
 3. [Configurar la estación](https://github.com/G4lile0/tinyGS/wiki/Ground-Station-configuration).
 
 ### Montaje
 Como soporte a la placa del microcontrolador tenemos dos opciones:
 * Para uso interior: [caja impresa en 3D](https://github.com/McOrts/taller-lora-sat-groundstation/blob/main/3D/TTGO_LoRa32.chitubox):
 <img src="./img/TTGO_LoRa32_case3D.png" width=300 align="center" />
+
 * Para exterior se puede usar la de los relés Sonoff:
 <img src="./img/sonoff_case.png" width=300 align="center" />
 
@@ -41,13 +43,14 @@ Hay múltiples opciones, desde la más DIY hasta comerciales ya calibradas que p
 
 1. Dipolo, es una antena simple compuesta de dos elementos y facil de contruir:
    - [Impresa 3D con tubo de 6mm](https://github.com/McOrts/taller-lora-sat-groundstation/blob/main/3D/DipoleAntenna.stl) [Utiliza este calculador para la longitud](https://www.translatorscafe.com/unit-converter/da-DK/calculator/dipole-antenna/).
-   <img src="./img/antenna_dipole3D.png" width=300 align="center" />
+   <img src="./img/antenna_dipole3D.jpg" width=300 align="center" />
    
    - Rabbit Ear (por @estbhan)
    <img src="./img/antenna_rabbitear.jpg" width=300 align="center" />
    
    - JPCoax (por @kreatif)
-   <img src="./img/antenna_ JPCoax.jpg" width=300 align="center" />
+   <img src="./img/antenna_JPCoax.jpg" width=300 align="center" />
+   
    - [Aliexpress 400-433 MHz](https://a.aliexpress.com/_vkAMUN) Parece que se mejora su sensibilidad usando unos tornillos extensores. 
 
 2. Antena de cuardo de onda (a.k.a plano de tierra)
@@ -105,7 +108,9 @@ ALTER TABLE `tinygs`
   ADD PRIMARY KEY (`dtg`,`station_id`);
 ```
 2. Importar en Node-RED el fichero [nodered_dashboard4TINYGS.json](/nodered_dashboard4TINYGS.json) que contiene todos los flujos.
-3. Configurar las credenciales y hash para acceder a:
+![Node-RED install options](/nodered/nodered_flows_dashboard4TINYGS.png)
+
+4. Configurar las credenciales y hash para acceder a:
 -- Servidor MQTT
 -- Servidor MySQL
 -- Llamada a IFTTT
