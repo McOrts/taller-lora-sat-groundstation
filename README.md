@@ -73,8 +73,8 @@ Vamos a montar un _dashboard_ que nos permitirá monitorizar hasta dos estacione
 - Saber los parámtros de conexión del modem.
 - Analizar la señal recibida a través del historico de los indicadores.
 - Recibir avisos:
--- Receptor caído. No se conecta a la red WiFi
--- Satélite recibido.
+   - Receptor caído. No se conecta a la red WiFi
+   - Satélite recibido.
 
 ![Node-RED NOC TinyGS dashboard](/nodered/nodered_ui_dashboard4TINYGS.png)
 
@@ -87,12 +87,13 @@ También vamos a necesitar algunos 'nodos' adicionales a los que incluye la inst
 - [node-red-contrib-ui-media](https://flows.nodered.org/node/node-red-contrib-ui-media/in/590bc13ff3a5f005c7d2189bbb563976) Nos permite mostrar las imágenes en el Interface de Usuario
 - [node-red-node-mysql](https://flows.nodered.org/node/node-red-node-mysql) Nos permitirá acceder a una base de datos MySQL. En nuestro caso para guardar mensajes recibidos.
 
+<img src="./nodered/ifttt.png" width=200 align="right" />
+
 ## IFTTT
 Para recibir los avisos vamos a usar el servicio de [If This Then That](https://ifttt.com/home) que se integrará fácilmente en Node-RED usando el nodo de petición HTTP.
 ```
 https://maker.ifttt.com/trigger/TinyGS/with/key/[clave de IFTTT]?value1={{{payload}}}
 ```
-
 El servicio a configurar es simple. Utilizaremos el componente Webhooks para captar el evento y las notificaciones para que salte el aviso en nuestro dispositivo: móvil, smartwatch...
 
 ### Montaje final
@@ -107,12 +108,12 @@ CREATE TABLE `tinygs` (
 ALTER TABLE `tinygs`
   ADD PRIMARY KEY (`dtg`,`station_id`);
 ```
-2. Importar en Node-RED el fichero [nodered_dashboard4TINYGS.json](/nodered_dashboard4TINYGS.json) que contiene todos los flujos.
+2. Importar en Node-RED el fichero [nodered_dashboard4TINYGS.json](./nodered/nodered_dashboard4TINYGS.json) que contiene todos los flujos.
 ![Node-RED install options](/nodered/nodered_flows_dashboard4TINYGS.png)
 
-4. Configurar las credenciales y hash para acceder a:
--- Servidor MQTT
--- Servidor MySQL
--- Llamada a IFTTT
+3. Configurar las credenciales y hash para acceder a:
+- Servidor MQTT
+- Servidor MySQL
+- Llamada a IFTTT
 
 
