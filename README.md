@@ -42,8 +42,8 @@ La **antena** es la pieza clave a la que tendrás que prestar atención frecuent
 Hay múltiples opciones, desde la más DIY hasta comerciales ya calibradas que puedes comprar on-line:
 
 1. Dipolo, es una antena simple compuesta de dos elementos y facil de contruir:
-   - [Impresa 3D con tubo de 6mm](https://github.com/McOrts/taller-lora-sat-groundstation/blob/main/3D/DipoleAntenna.stl) [Utiliza este calculador para la longitud](https://www.translatorscafe.com/unit-converter/da-DK/calculator/dipole-antenna/).
-   <img src="./img/antenna_dipole3D.jpg" width=300 align="center" />
+   - [Impresa 3D con tubo de 6mm](./main/3D/DipoleAntenna.stl) [Utiliza este calculador para la longitud](https://www.translatorscafe.com/unit-converter/da-DK/calculator/dipole-antenna/).
+   <img src="./img/antenna_dipole3D.png" width=300 align="center" />
    
    - Rabbit Ear (por @estbhan)
    <img src="./img/antenna_rabbitear.jpg" width=300 align="center" />
@@ -53,7 +53,7 @@ Hay múltiples opciones, desde la más DIY hasta comerciales ya calibradas que p
    
    - [Aliexpress 400-433 MHz](https://a.aliexpress.com/_vkAMUN) Parece que se mejora su sensibilidad usando unos tornillos extensores. 
 
-2. Antena de cuardo de onda (a.k.a plano de tierra)
+2. Antena de cuarto de onda (a.k.a plano de tierra)
    - http://www.n1gy.com/simple-ground-plane-antennas.html
    - https://www.amazon.com/gp/product/B086YV2QLS/
 
@@ -73,26 +73,28 @@ Vamos a montar un _dashboard_ que nos permitirá monitorizar hasta dos estacione
 - Saber los parámtros de conexión del modem.
 - Analizar la señal recibida a través del historico de los indicadores.
 - Recibir avisos:
--- Receptor caído. No se conecta a la red WiFi
--- Satélite recibido.
+   - Receptor caído. No se conecta a la red WiFi
+   - Satélite recibido.
 
 ![Node-RED NOC TinyGS dashboard](/nodered/nodered_ui_dashboard4TINYGS.png)
 
 ### Node-RED
 En primer lugar necesitaremos tener [instalada una instancia de Node-RED](https://nodered.org/docs/getting-started/). La recomendación más actual es la hacerlo en un contetenedor Docker. Pero utilizar una Single Board Computer como la Raspberry Pi es muy adecuado porque los requisitos de capacidad de proceso y memoria son muy bajos.
-![Node-RED install options](/nodered/nodered_instalation.png)
+<img src="./nodered/nodered_instalation.png" width=500 align="center" />
+
 
 También vamos a necesitar algunos 'nodos' adicionales a los que incluye la instalación.
 - [node-red-dashboard](https://flows.nodered.org/node/node-red-dashboard) Nos suministra los nodos necesarios para construir el interface del usuario.
 - [node-red-contrib-ui-media](https://flows.nodered.org/node/node-red-contrib-ui-media/in/590bc13ff3a5f005c7d2189bbb563976) Nos permite mostrar las imágenes en el Interface de Usuario
 - [node-red-node-mysql](https://flows.nodered.org/node/node-red-node-mysql) Nos permitirá acceder a una base de datos MySQL. En nuestro caso para guardar mensajes recibidos.
 
+<img src="./nodered/ifttt.png" width=300 align="right" />
+
 ## IFTTT
 Para recibir los avisos vamos a usar el servicio de [If This Then That](https://ifttt.com/home) que se integrará fácilmente en Node-RED usando el nodo de petición HTTP.
 ```
 https://maker.ifttt.com/trigger/TinyGS/with/key/[clave de IFTTT]?value1={{{payload}}}
 ```
-
 El servicio a configurar es simple. Utilizaremos el componente Webhooks para captar el evento y las notificaciones para que salte el aviso en nuestro dispositivo: móvil, smartwatch...
 
 ### Montaje final
@@ -107,12 +109,12 @@ CREATE TABLE `tinygs` (
 ALTER TABLE `tinygs`
   ADD PRIMARY KEY (`dtg`,`station_id`);
 ```
-2. Importar en Node-RED el fichero [nodered_dashboard4TINYGS.json](/nodered_dashboard4TINYGS.json) que contiene todos los flujos.
+2. Importar en Node-RED el fichero [nodered_dashboard4TINYGS.json](./nodered/nodered_dashboard4TINYGS.json) que contiene todos los flujos.
 ![Node-RED install options](/nodered/nodered_flows_dashboard4TINYGS.png)
 
-4. Configurar las credenciales y hash para acceder a:
--- Servidor MQTT
--- Servidor MySQL
--- Llamada a IFTTT
+3. Configurar las credenciales y hash para acceder a:
+- Servidor MQTT
+- Servidor MySQL
+- Llamada a IFTTT
 
 
