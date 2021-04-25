@@ -1,12 +1,12 @@
 # Taller estación recepción de satélites LoRa TinyGS
 Este repositorio contiene el código, información y documentación necesaria para montar un mini-receptor de señal de satélite con modulación LoRa.
 
+<img src="https://github.com/G4lile0/tinyGS/blob/master/doc/images/TinyGS_architecture.png" width=300 align="left" />
+
 El tipo de receptor se basa en los estándares del proyecto [TinyGS](https://github.com/G4lile0/tinyGS) creado por:
 - [4m1g0](https://github.com/4m1g0)
 - [G4lile0](https://github.com/G4lile0)
 - [gmag11](https://github.com/gmag11)
-
-<img src="https://github.com/G4lile0/tinyGS/blob/master/doc/images/TinyGS_architecture.png" width=300 align="left" />
 
 TinyGS se define como una red abierta de estaciones terrestres distribuidas por todo el mundo para recibir y operar satélites LoRa, sondas meteorológicas y otros objetos voladores, utilizando módulos baratos y versátiles. A diferencia de otras, no se requiere de grandes conocimientos en telecomunicaciones ni licencias de radioaficionado. Está orientada por una parte a la participación de personas en el mundo Maker sin grandes exigencias técnicas. Y por otro a dar servicio a los operadores de los satélites recibiendo telemetría y otros datos en tiempo real gracias al despliegue mundial de la red de estaciones.
 
@@ -17,7 +17,7 @@ La red TinyGS está creciendo de forma exponencial y está destinada a jugar un 
 <img src="./img/Photo 8-11-20, 12 58 03.jpg" width=300 align="right" />
 
 ## Construcción de la estación receptora
-## Configuración del hardware
+### Configuración del hardware
 En la elección del microcontrolador hay muchas opciones. Para el taller hemos elegido el **TTGO LoRa32 V2 (433MHz)**
 Además de esta placa necesitarás lo siguiente:
 - [ ] Usuario de Telegram
@@ -64,6 +64,12 @@ Hay múltiples opciones, desde la más DIY hasta comerciales ya calibradas que p
 4. Direccional: [Antena Yagi de UHF430-450MHz](https://es.aliexpress.com/item/4000738955092.html)
 
 ## Dashboard de control (NOC en Node-RED)
+El _backoffice_ de TinyGS publica dos _topics_ con información de tu estación. Esta aplicación de control se basa en la subscripción a los mismos:
+```
+tinygs/[user]/[nombre de la estación]/cmnd/begin
+tinygs/[user]/[nombre de la estación]/cmnd/frame/0
+```
+
 [Node-RED](https://nodered.org/) es una herramienta de programación visual. Muestra gráficamente relaciones entre objetos (nodos) que son funciones que transforman el mensaje que les llega de los nodos precedentes. 
 Utilizando nodos estándar, el usuario no necesita programar. Aunque si se quiere, se pueden crear funciones programando en JavaScript. En definitiva permite, desde un navegador web, construir flujos para procesar información y comunicarla a través de infinidad de integraciones.
 
@@ -80,8 +86,8 @@ Vamos a montar un _dashboard_ que nos permitirá monitorizar hasta dos estacione
 
 ### Node-RED
 En primer lugar necesitaremos tener [instalada una instancia de Node-RED](https://nodered.org/docs/getting-started/). La recomendación más actual es hacerlo en un contenedor Docker. Pero utilizar una Single Board Computer como la Raspberry Pi es muy adecuado porque los requisitos de capacidad de proceso y memoria son muy bajos.
-<img src="./nodered/nodered_instalation.png" width=500 align="center" />
 
+<img src="./nodered/nodered_instalation.png" width=500 align="center" />
 
 También vamos a necesitar algunos 'nodos' adicionales a los que incluye la instalación.
 - [node-red-dashboard](https://flows.nodered.org/node/node-red-dashboard) Nos suministra los nodos necesarios para construir el interface del usuario.
